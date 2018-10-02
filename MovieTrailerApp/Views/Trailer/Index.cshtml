@@ -1,0 +1,72 @@
+﻿@model MovieTrailerApp.Models.Movie
+@{
+    ViewBag.Title = @Model.Title;
+}
+<a href="/" class="right btn btn-default">Back to home</a>
+<h1>@Html.DisplayFor(model => model.Title)</h1>
+
+<hr/>
+<div class="row MovieResult">
+    <div class="col-sm-4">
+        <img src="@Model.Poster" alt=@Model.Title />
+    </div>
+    <div class="col-sm-8">
+        @Html.LabelFor(model => model.Title): @Html.DisplayFor(model => model.Title)
+        <br/>
+        @Html.LabelFor(model => model.Year): @Html.DisplayFor(model => model.Year)
+        <br />
+        @Html.LabelFor(model => model.Genre): @Html.DisplayFor(model => model.Genre)
+        <br />
+        @Html.LabelFor(model => model.Director): @Html.DisplayFor(model => model.Director)
+        <br />
+        @Html.LabelFor(model => model.Writer): @Html.DisplayFor(model => model.Writer)
+        <br />
+        @Html.LabelFor(model => model.Actors): @Html.DisplayFor(model => model.Actors)
+        <br />
+        @Html.LabelFor(model => model.Plot): @Html.DisplayFor(model => model.Plot)
+        <br />
+        <h2>Trailers</h2>
+        <ul class="TrailerResultList">
+            @foreach (var item in Model.TrailerList)
+            {
+                <li class="TrailerModalLink" value="@Url.Content(item.TrailerUrl)">
+                        <span class="TrailerTitle">@Html.DisplayFor(modelItem => item.TrailerName)</span>
+                        <img class="TrailerThumb" src="@Url.Content(item.Thumbnail)" />
+                </li>
+            }
+        </ul> 
+                 
+        
+        <div id="TrailerModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                        
+                    </div>
+                    <div class="modal-body">
+                        <div class="YoutubeContainer">
+                            <iframe id="YoutubeMovie" width="878" height="494" src="" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $('.TrailerModalLink').click(function () {
+                $('#YoutubeMovie').attr('src', $(this).attr('value'));
+                $('#TrailerModal').modal('show');
+            });
+
+            $('#TrailerModal').on('hide.bs.modal', function () {
+                $('#YoutubeMovie').attr('src', '');
+            })
+        </script>  
+                
+    </div>
+</div>
+
+
+
+
+

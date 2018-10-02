@@ -1,0 +1,63 @@
+﻿@model MovieTrailerApp.Models.SearchModel
+@{
+    ViewBag.Title = "Movie Trailer Search";
+}
+<br/>
+<strong>Enter movie title to search for trailers</strong>
+
+
+<script type="text/javascript">
+        $(function () {
+            $("#SearchQuery").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/api/search/' + request.term,                       
+                        dataType: "json",
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Title, value: item.imdbID, };
+                            }))
+                        }                       
+                    });
+                },
+                focus: function(event, ui) {
+                    event.preventDefault();
+                    $("#SearchQuery").val(ui.item.label);
+                },
+                select: function (e, i) {                                        
+                    window.location.href = '/trailer/' + i.item.value + '?movie=' + encodeURIComponent(i.item.label);
+                },
+                minLength: 3
+            });
+        });
+</script>
+
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "SearchForm" }))
+{
+    @Html.TextBoxFor(m => m.SearchQuery)
+    <input type="submit" value="Search" />
+}
+<hr />
+@if (Model.Movies.Count > 1)
+{ <h3>Search results for: @Model.SearchQuery</h3> }
+<div>
+    <ul class="SearchResultList">
+        @foreach (var item in Model.Movies)
+        {
+            <li>
+                <a href="@String.Format("/trailer/{0}?movie={1}", item.imdbID, @Url.Encode(item.Title))" >
+                    <div class="SearchPoster" style="background-image:url(@Url.Content(item.Poster));"></div>
+                    <div class="SearchInfo">
+                        <span class="SearchTitle">@Html.DisplayFor(modelItem => item.Title)</span>
+                        <span class="SearchYear">@Html.DisplayFor(modelItem => item.Year)</span>
+                    </div>
+                </a>
+            </li>
+        }
+    </ul>
+    <div class="clear"></div>
+</div>

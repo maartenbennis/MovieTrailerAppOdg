@@ -1,0 +1,70 @@
+﻿body, html {  padding:0px; }
+
+.right{ float:right;}
+
+header {background-color:#d52225; margin-bottom:10px; }
+.Logo { width:50px; float:left; margin-top:4px; margin-right:10px;}
+header a, header a:hover {color:white; text-decoration:none}
+footer { background-color:#d52225; height:75px; text-align:center; padding:10px; color:#fff;}
+
+*, h1,h2,h3,h4,h5 { font-family: 'Open Sans', sans-serif;}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom:15px;
+}
+.clear { clear:both;}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.SearchPoster{ width:100%; height:397.5px; background-size:cover; background-position:center;}
+.SearchResultList { list-style:none; padding:0px; font-size:18px; text-align:center; }
+.SearchResultList li { float:left; width:25%; padding:10px; color:black}
+.SearchResultList li a {color:black;}
+.SearchResultList li a:hover {text-decoration:none; }
+.SearchResultList li:hover { box-shadow: 0px 0px 5px 1px #a6a6a6; }
+.SearchInfo {border:1px solid #e5e5e5; border-top:none; padding:10px;}
+.SearchYear { }
+.SearchTitle { font-weight:600; display:block; min-height:52px; }
+
+@media (max-width: 1200px)
+{
+    .SearchPoster { height:322.5px;}
+}
+@media (max-width: 991px)
+{
+    .SearchPoster { height:240px;}
+}
+
+@media (max-width: 767px)
+{
+    .SearchResultList li {width:50%;}
+    .SearchPoster { height:61vw;}
+}
+
+.MovieResult img { max-width:100%; margin-bottom:15px;}
+.TrailerResultList { list-style:none; padding:0px; font-size:14px; text-align:center; }
+.TrailerResultList li { float:left; width:25%; padding:10px; color:black}
+.TrailerResultList li:hover { box-shadow: 0px 0px 5px 1px #a6a6a6; cursor:pointer; }
+.TrailerThumb{ max-width:100%;  }
+.TrailerTitle { display:block; min-height:80px;}
+
+@media (max-width: 991px) {
+    .TrailerResultList li {width:50%;}
+}
+
+.modal-dialog { width:940px; max-width:100%;}
+.YoutubeContainer { position:relative; padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;  }
+.YoutubeContainer iframe, .YoutubeContainer object, .YoutubeContainer embed {
+	position:absolute;	top:0;	left:0;	width:100%;	height:100%; }
